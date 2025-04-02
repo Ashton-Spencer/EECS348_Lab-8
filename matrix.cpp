@@ -69,7 +69,7 @@ int sum_diagonal_major() const {
 
 int sum_diagonal_minor() const {
     int sum;
-    int j = size;
+    int j = size - 1;
     for (int i = 0; i<size; i++) {
         sum += nums[i][j];
         j--;
