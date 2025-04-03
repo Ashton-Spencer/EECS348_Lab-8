@@ -46,11 +46,15 @@ Matrix operator*(const Matrix &rhs) const {
 }
 
 void set_value(std::size_t i, std::size_t j, int n) {
-    nums[i][j] = n;
+    if (i<size && j<size) {
+        nums[i][j] = n;
+    }
 }
 
 int get_value(std::size_t i, std::size_t j) const {
-    return nums[i][j];
+    if (i<size && j<size) {
+        return nums[i][j];
+    }
 }
 
 int get_size() const {
