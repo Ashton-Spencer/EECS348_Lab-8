@@ -18,12 +18,13 @@ int main(int argc, char *argv[]) {
         std::getline(inputFile, n);
         Matrix matrix1(n);
         Matrix matrix2(n);
-        } else if (input == 2 && matrix_inputed == true) {
+        } 
+        else if (input == 2 && matrix_inputed == true) {
             matrix1 + matrix2;
         } else if (input == 3 && matrix_inputed == true) {
             
         } else if (input == 4 && matrix_inputed == true) {
-            
+            matrix1.ca
         } else if (input == 5 && matrix_inputed == true) {
             
         } else if (input == 6 && matrix_inputed == true) {
