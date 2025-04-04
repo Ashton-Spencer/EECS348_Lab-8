@@ -2,29 +2,14 @@
 #include <vector>
 #include <iostream>
 
-// implementation of functions declared in matrix.hpp goes here
-// function definitions for a class have their names prefixed with
-// the class name and "::"
-
-// e.g. for the constructor:
-class Matrix {
-
-private:     
-    std::vector<std::vector<int>> nums;
-    size_t size;
-
-public:
-    Matrix::Matrix(size_t N) {
-    // initialize an empty NxN matrix
+Matrix::Matrix(std::size_t N) : size(N) {
     nums.resize(N, std::vector<int>(N, 0));
-    size = N;
 }
 
-// e.g. for a member function:
+Matrix::Matrix(const std::vector<std::vector<int>>& nums) : nums(nums), size(nums.size()) {}
 
 void Matrix::print_matrix() const {
-    // print out the matrix
-    for (const auto&row : nums) {
+    for (const auto& row : nums) {
         for (int val : row) {
             std::cout << val << " ";
         }
@@ -32,73 +17,71 @@ void Matrix::print_matrix() const {
     }
 }
 
-Matrix operator+(const Matrix &rhs) const {
-    Matrix result_matrix(size);
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < size; ++j) {
-            result_matrix.nums[i][j] = nums[i][j] + rhs.nums[i][j];
+Matrix Matrix::operator+(const Matrix &rhs) const {
+    Matrix result(size);
+    for (std::size_t i = 0; i < size; ++i) {
+        for (std::size_t j = 0; j < size; ++j) {
+            result.nums[i][j] = nums[i][j] + rhs.nums[i][j];
         }
     }
-    return result_matrix;
+    return result;
 }
 
-Matrix operator*(const Matrix &rhs) const {
-    Matrix result_matrix(size);
-    for(int i = 0; i < size; ++i)
-        for(int j = 0; j < size; ++j)
-            for(int k = 0; k < size; ++k)
-            {
-                result_matrix.nums[i][j] += nums[i][k] * rhs.nums[k][j];
+Matrix Matrix::operator*(const Matrix &rhs) const {
+    Matrix result(size);
+    for (std::size_t i = 0; i < size; ++i) {
+        for (std::size_t j = 0; j < size; ++j) {
+            for (std::size_t k = 0; k < size; ++k) {
+                result.nums[i][j] += nums[i][k] * rhs.nums[k][j];
             }
-    return result_matrix;
+        }
+    }
+    return result;
 }
 
-void set_value(std::size_t i, std::size_t j, int n) {
-    if (i<size && j<size) {
+void Matrix::set_value(std::size_t i, std::size_t j, int n) {
+    if (i < size && j < size) {
         nums[i][j] = n;
     }
 }
 
-int get_value(std::size_t i, std::size_t j) const {
-    if (i<size && j<size) {
+int Matrix::get_value(std::size_t i, std::size_t j) const {
+    if (i < size && j < size) {
         return nums[i][j];
     }
     return 0;
 }
 
-int get_size() const {
+std::size_t Matrix::get_size() const {
     return size;
 }
 
-int sum_diagonal_major() const {
-    int sum;
-    int j = 0;
-    for (int i = 0; i <size; i++) {
-        sum += nums[i][j];
-        j++;
+int Matrix::sum_diagonal_major() const {
+    int sum = 0;
+    for (std::size_t i = 0; i < size; ++i) {
+        sum += nums[i][i];
     }
     return sum;
 }
 
-int sum_diagonal_minor() const {
-    int sum;
-    int j = size - 1;
-    for (int i = 0; i<size; i++) {
-        sum += nums[i][j];
-        j--;
+int Matrix::sum_diagonal_minor() const {
+    int sum = 0;
+    for (std::size_t i = 0; i < size; ++i) {
+        sum += nums[i][size - 1 - i];
     }
     return sum;
 }
 
-void swap_rows(std::size_t r1, std::size_t r2) {
-    std::swap(nums[r1], nums[r2]);
+void Matrix::swap_rows(std::size_t r1, std::size_t r2) {
+    if (r1 < size && r2 < size) {
+        std::swap(nums[r1], nums[r2]);
+    }
 }
 
-void swap_cols(std::size_t c1, std::size_t c2) {
+void Matrix::swap_cols(std::size_t c1, std::size_t c2) {
     if (c1 < size && c2 < size) {
         for (std::size_t i = 0; i < size; ++i) {
             std::swap(nums[i][c1], nums[i][c2]);
         }
     }
 }
-};
