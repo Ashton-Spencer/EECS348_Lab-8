@@ -6,34 +6,104 @@
 int main(int argc, char *argv[]) {
     int input;
     bool matrix_inputed = false;
-    while (1) {
+    std::string fileName;
+    std::cout << "Enter File Name: ";
+    std::cin >> fileName;
+    std::ifstream inputFile(fileName);
+    int n;
+    inputFile >> n;
+    Matrix matrix1 = Matrix(n);
+    Matrix matrix2 = Matrix(n);
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            int val;
+            inputFile >> val;
+            matrix1.set_value(i, j, val);
+        }
+    }
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            int val;
+            inputFile >> val;
+            matrix2.set_value(i, j, val);
+        }
+    }
+    std::cout << "Matrix 1:\n";
+    matrix1.print_matrix();
+    std::cout << "Matrix 2:\n";
+    matrix2.print_matrix();
+    while (true) {
         print_options();
         std::cin >> input;
         if (input == 1) {
-        std::string fileName;
-        std::cout << "Enter File Name" << std::endl;
-        std::cin >> fileName;
-        std::ifstream inputFile(fileName);
-        int n;
-        std::getline(inputFile, n);
-        Matrix matrix1(n);
-        Matrix matrix2(n);
-        } 
-        else if (input == 2 && matrix_inputed == true) {
-            matrix1 + matrix2;
-        } else if (input == 3 && matrix_inputed == true) {
-            
-        } else if (input == 4 && matrix_inputed == true) {
-            matrix1.ca
-        } else if (input == 5 && matrix_inputed == true) {
-            
-        } else if (input == 6 && matrix_inputed == true) {
-            
-        } else if (input == 7 && matrix_inputed == true) {
-            
-        } else if (matrix_inputed == false){
-            std::cout << "Matrix Not inputed" << std::endl;
-        }else {
+            std::cout << "Enter File Name: ";
+            std::cin >> fileName;
+            std::ifstream inputFile(fileName);
+            int n;
+            inputFile >> n;
+            Matrix matrix1 = Matrix(n);
+            Matrix matrix2 = Matrix(n);
+            for (int i = 0; i < n; ++i) {
+                for (int j = 0; j < n; ++j) {
+                    int val;
+                    inputFile >> val;
+                    matrix1.set_value(i, j, val);
+                }
+            }
+            for (int i = 0; i < n; ++i) {
+                for (int j = 0; j < n; ++j) {
+                    int val;
+                    inputFile >> val;
+                    matrix2.set_value(i, j, val);
+                }
+            }
+            std::cout << "Matrix 1:\n";
+            matrix1.print_matrix();
+            std::cout << "Matrix 2:\n";
+            matrix2.print_matrix();
+        } else if (input == 2) {
+            Matrix result = matrix1 + matrix2;
+            std::cout << "Sum of matrices:\n";
+            result.print_matrix();
+        } else if (input == 3) {
+            Matrix result = matrix1 * matrix2;
+            std::cout << "Product of matrices:\n";
+            result.print_matrix();
+        } else if (input == 4) {
+            std::cout << "Main diagonal sum: " << matrix1.sum_diagonal_major() << "\n";
+            std::cout << "Secondary diagonal sum: " << matrix1.sum_diagonal_minor() << "\n";
+        } else if (input == 5) {
+            std::size_t r1, r2;
+            std::cout << "Enter two row indices to swap: ";
+            std::cin >> r1 >> r2;
+            if (r1 < matrix1.get_size() && r2 < matrix1.get_size()) {
+                matrix1.swap_rows(r1, r2);
+                matrix1.print_matrix();
+            } else {
+                std::cout << "Invalid row indices.\n";
+            }
+        } else if (input == 6) {
+            std::size_t c1, c2;
+            std::cout << "Enter two column indices to swap: ";
+            std::cin >> c1 >> c2;
+            if (c1 < matrix1.get_size() && c2 < matrix1.get_size()) {
+                matrix1.swap_cols(c1, c2);
+                matrix1.print_matrix();
+            } else {
+                std::cout << "Invalid column indices.\n";
+            }
+        } else if (input == 7) {
+            std::size_t row, col;
+            int val;
+            std::cout << "Enter row, column, and new value: ";
+            std::cin >> row >> col >> val;
+            if (row < matrix1.get_size() && col < matrix1.get_size()) {
+                matrix1.set_value(row, col, val);
+                matrix1.print_matrix();
+            } else {
+                std::cout << "Invalid indices.\n";
+            }
+        } else {
             std::cout << "Invalid Choice" << std::endl;
         }
     }

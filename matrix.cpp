@@ -39,6 +39,7 @@ Matrix operator+(const Matrix &rhs) const {
             result_matrix.nums[i][j] = nums[i][j] + rhs.nums[i][j];
         }
     }
+    return result_matrix;
 }
 
 Matrix operator*(const Matrix &rhs) const {
@@ -49,6 +50,7 @@ Matrix operator*(const Matrix &rhs) const {
             {
                 result_matrix.nums[i][j] += nums[i][k] * rhs.nums[k][j];
             }
+    return result_matrix;
 }
 
 void set_value(std::size_t i, std::size_t j, int n) {
@@ -61,6 +63,7 @@ int get_value(std::size_t i, std::size_t j) const {
     if (i<size && j<size) {
         return nums[i][j];
     }
+    return 0;
 }
 
 int get_size() const {
@@ -92,6 +95,10 @@ void swap_rows(std::size_t r1, std::size_t r2) {
 }
 
 void swap_cols(std::size_t c1, std::size_t c2) {
-
+    if (c1 < size && c2 < size) {
+        for (std::size_t i = 0; i < size; ++i) {
+            std::swap(nums[i][c1], nums[i][c2]);
+        }
+    }
 }
 };
