@@ -3,6 +3,19 @@
 #include <string>
 #include <fstream>
 
+
+void print_options() 
+{
+    std::cout << "Choose an Option" << std::endl;
+    std::cout << "1) Read Values from File" << std::endl;
+    std::cout << "2) Add Two Matrices and Display Result" << std::endl;
+    std::cout << "3) Multiply Two Matrices and Display Result" << std::endl;
+    std::cout << "4) Get the Sum of Matrix Diagonal Elements" << std::endl;
+    std::cout << "5) Swap Matrix Rows and Display the Result" << std::endl;
+    std::cout << "6) Swap Matrix Columns and Display the Result" << std::endl;
+    std::cout << "7) Update Matrix Rows and Display the Result" << std::endl;
+}
+
 int main(int argc, char *argv[]) {
     int input;
     bool matrix_inputed = false;
@@ -108,16 +121,4 @@ int main(int argc, char *argv[]) {
         }
     }
     return 0;
-}
-
-void print_options() 
-{
-    std::cout << "Choose an Option" << std::endl;
-    std::cout << "1) Read Values from File" << std::endl;
-    std::cout << "2) Add Two Matrices and Display Result" << std::endl;
-    std::cout << "3) Multiply Two Matrices and Display Result" << std::endl;
-    std::cout << "4) Get the Sum of Matrix Diagonal Elements" << std::endl;
-    std::cout << "5) Swap Matrix Rows and Display the Result" << std::endl;
-    std::cout << "6) Swap Matrix Columns and Display the Result" << std::endl;
-    std::cout << "7) Update Matrix Rows and Display the Result" << std::endl;
 }
