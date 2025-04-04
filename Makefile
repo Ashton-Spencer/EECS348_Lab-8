@@ -1,7 +1,9 @@
-CC := gcc
+CC := g++
 
-main.exe: matrix.cpp matrix.h main.cpp
-	&(CC) -o main.exe main.cpp matrix.cpp
+all: matrix.exe
+
+matrix.exe: main.cpp matrix.cpp matrix.hpp
+	$(CC) -o matrix.exe main.cpp matrix.cpp
 
 clean:
-	rm -f main.exe
+	rm -f matrix.exe
