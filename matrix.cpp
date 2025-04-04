@@ -1,6 +1,7 @@
 #include "matrix.hpp"
 #include <vector>
 #include <iostream>
+#include <stdexcept>
 
 Matrix::Matrix(std::size_t N) : size(N) {
     nums.resize(N, std::vector<int>(N, 0));
@@ -40,16 +41,18 @@ Matrix Matrix::operator*(const Matrix &rhs) const {
 }
 
 void Matrix::set_value(std::size_t i, std::size_t j, int n) {
-    if (i < size && j < size) {
-        nums[i][j] = n;
+    if (i >= size || j >= size) {
+        throw std::out_of_range("Index out of bounds");
     }
+    nums[i][j] = n;
 }
 
+
 int Matrix::get_value(std::size_t i, std::size_t j) const {
-    if (i < size && j < size) {
-        return nums[i][j];
+    if (i >= size || j >= size) {
+        throw std::out_of_range("Index out of bounds");
     }
-    return 0;
+    return nums[i][j];
 }
 
 std::size_t Matrix::get_size() const {
@@ -73,15 +76,18 @@ int Matrix::sum_diagonal_minor() const {
 }
 
 void Matrix::swap_rows(std::size_t r1, std::size_t r2) {
-    if (r1 < size && r2 < size) {
-        std::swap(nums[r1], nums[r2]);
+    if (r1 >= size || r2 >= size) {
+        throw std::out_of_range("Row index out of bounds");
     }
+    std::swap(nums[r1], nums[r2]);
 }
 
+
 void Matrix::swap_cols(std::size_t c1, std::size_t c2) {
-    if (c1 < size && c2 < size) {
-        for (std::size_t i = 0; i < size; ++i) {
-            std::swap(nums[i][c1], nums[i][c2]);
-        }
+    if (c1 >= size || c2 >= size) {
+        throw std::out_of_range("Column index out of bounds");
+    }
+    for (std::size_t i = 0; i < size; ++i) {
+        std::swap(nums[i][c1], nums[i][c2]);
     }
 }
